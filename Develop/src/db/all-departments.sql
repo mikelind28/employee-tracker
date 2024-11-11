@@ -1,0 +1,1 @@
+SELECT department.id AS "Department ID", department.department_name AS "Department Name" FROM department;
