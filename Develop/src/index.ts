@@ -123,7 +123,9 @@ function viewAllEmployees() {
     db.viewAllEmployees()
         .then(( {rows} ) => {
             const employees = rows;
+            console.log("\n");
             console.table(employees);
+            console.log("\n");
         })
         .then(() => inquirerMainMenu());
 }
@@ -337,6 +339,7 @@ function addNewDepartment() {
                     console.log("\n");
                     console.log("New department added!")
                     console.log("\n");
+                    inquirerMainMenu();
                 })
         })
 }
@@ -353,7 +356,6 @@ async function updateEmployeeRole() {
     });
 
     const roleQueryResponse = await db.viewAllRoles();
-    console.table(roleQueryResponse.rows);
 
     const rolesArray = roleQueryResponse.rows.map(role => {
         return {
@@ -379,7 +381,9 @@ async function updateEmployeeRole() {
         ])
         .then(async res => {
             await db.updateEmployeeRole(res.employeeSelect, res.roleSelect);
+            console.log("\n");
             console.log(`Employee's role has been updated!`);
+            console.log("\n");
             inquirerMainMenu();
         })
 }
@@ -387,7 +391,6 @@ async function updateEmployeeRole() {
 
 async function updateEmployeeManager() {
     const employeeQueryResponse = await db.viewAllEmployees();
-    console.table(employeeQueryResponse.rows);
 
     const employeesArray = employeeQueryResponse.rows.map(employee => {
         return {
@@ -413,7 +416,9 @@ async function updateEmployeeManager() {
         ])
         .then(async res => {
             await db.updateEmployeeManager(res.employeeSelect, res.managerSelect),
+            console.log("\n");
             console.log(`Employee's manager has been updated!`);
+            console.log("\n");
             inquirerMainMenu();
         })
 }
@@ -421,7 +426,6 @@ async function updateEmployeeManager() {
 
 async function deleteEmployee() {
     const queryResponse = await db.viewAllEmployees();
-    console.table(queryResponse.rows);
 
     const choicesArray = queryResponse.rows.map(employee => {
         return {
@@ -440,8 +444,10 @@ async function deleteEmployee() {
             }
         ])
         .then(async res => {
-            const deleteResponse = await db.deleteEmployee(res.employeeID);
-            console.log(`${deleteResponse} has been deleted.`);
+            await db.deleteEmployee(res.employeeID);
+            console.log("\n");
+            console.log(`This employee has been deleted.`);
+            console.log("\n");
             inquirerMainMenu();
         });
 }
@@ -449,7 +455,6 @@ async function deleteEmployee() {
 
 async function deleteRole() {
     const queryResponse = await db.viewAllRoles();
-    console.table(queryResponse.rows);
 
     const choicesArray = queryResponse.rows.map(role => {
         return {
@@ -462,14 +467,16 @@ async function deleteRole() {
         .prompt([
             {
                 name: 'roleID',
-                message: 'Which employee would you like to delete?',
+                message: 'Which role would you like to delete?',
                 type: 'list',
                 choices: choicesArray
             }
         ])
         .then(async res => {
-            const deleteResponse = await db.deleteRole(res.roleID);
-            console.log(`${deleteResponse} has been deleted.`);
+            await db.deleteRole(res.roleID);
+            console.log("\n");
+            console.log(`This role has been deleted.`);
+            console.log("\n");
             inquirerMainMenu();
         });
 }
@@ -477,7 +484,6 @@ async function deleteRole() {
 
 async function deleteDepartment() {
     const queryResponse = await db.viewAllDepartments();
-    console.table(queryResponse.rows);
 
     const choicesArray = queryResponse.rows.map(department => {
         return {
@@ -496,8 +502,10 @@ async function deleteDepartment() {
             }
         ])
         .then(async res => {
-            const deleteResponse = await db.deleteDepartment(res.departmentID);
-            console.log(`${deleteResponse} has been deleted.`);
+            await db.deleteDepartment(res.departmentID);
+            console.log("\n");
+            console.log(`This department has been deleted.`);
+            console.log("\n");
             inquirerMainMenu();
         });
 }
