@@ -1,8 +1,8 @@
 // import inquirer from 'inquirer';
-import { QueryResult } from 'pg';
-import { pool, connectToDb } from './connection.js';
+// import { QueryResult } from 'pg';
+// import { pool, connectToDb } from './connection.js';
 
-await connectToDb();
+// await connectToDb();
 
 // let exit = false;
 
