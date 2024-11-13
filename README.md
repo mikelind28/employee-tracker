@@ -29,11 +29,13 @@ cd employee-tracker/Develop
 ```
 npm install
 ```
-You're now ready to use Employee Tracker!
+You're almost ready to use Employee Tracker!
 
 ## Usage
 
-After [installing](#installation) the application, simply run ```npm run build``` and then ```npm run start``` from the terminal from within the Develop folder. Then, follow the prompts using your keyboard's arrow keys and the return key. 
+After [installing](#installation) the application, you'll have to initialize the database and populate it with data. From the command line, ```cd src/db```, start PostgreSQL with ```psql -U postgres```, and enter your password. Use the ```\i schema.sql``` and then ```\i seeds.sql``` commands to get the database up and running.
+
+Going back to ```cd ../../```, simply run ```npm run build``` and then ```npm run start``` from the terminal from within the Develop folder. Then, follow the prompts using your keyboard's arrow keys and the return key. 
 
 See a video walkthrough of the application [here]().
 
