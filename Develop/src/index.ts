@@ -51,6 +51,10 @@ function inquirerMainMenu() {
                     value: 'UPDATE_EMPLOYEE_MANAGER'
                 },
                 {
+                    name: 'View salary totals by department',
+                    value: 'VIEW_SALARY_BY_DEPARTMENT'
+                },
+                {
                     name: 'Delete employee',
                     value:'DELETE_EMPLOYEE',
                 },
@@ -102,6 +106,9 @@ function inquirerMainMenu() {
                 break;
             case 'UPDATE_EMPLOYEE_MANAGER':
                 updateEmployeeManager();
+                break;
+            case 'VIEW_SALARY_BY_DEPARTMENT':
+                viewSalaryTotalsByDepartment();
                 break;
             case 'DELETE_EMPLOYEE':
                 deleteEmployee();
@@ -245,6 +252,8 @@ async function addNewEmployee() {
             value: employee.id
         }
     });
+
+    choicesArray.unshift({name: "None", value: null});
 
     inquirer
         .prompt([
@@ -421,6 +430,36 @@ async function updateEmployeeManager() {
             console.log("\n");
             inquirerMainMenu();
         })
+}
+
+
+async function viewSalaryTotalsByDepartment() {
+    const departmentQueryResponse = await db.viewAllDepartments();
+
+    const departmentsArray = departmentQueryResponse.rows.map(department => {
+        return {
+            name: department.department_name,
+            value: department.id
+        }
+    });
+
+    inquirer
+        .prompt([
+            {
+                name: 'departmentSelect',
+                message: "Select a department to see the sum of all salaries for that department.",
+                type: 'list',
+                choices: departmentsArray
+            }
+        ])
+        .then(async res => {
+            const queryResult = await db.viewSalaryTotalsByDepartment(res.departmentSelect);
+            console.log("\n");
+            console.log("Here is the sum of all salaries for the selected department:");
+            console.table(queryResult.rows);
+            console.log("\n");
+            inquirerMainMenu();
+        });
 }
 
 

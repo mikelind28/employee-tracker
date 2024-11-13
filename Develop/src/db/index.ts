@@ -99,6 +99,18 @@ export default class DB {
         );
     }
 
+    viewSalaryTotalsByDepartment(id: number) {
+        return this.query(
+            `SELECT department.department_name, sum(role.salary)
+	            FROM role
+	            JOIN department
+		            ON role.department_id = department.id
+	            WHERE department.id = $1
+	            GROUP BY department.department_name`,
+                [id]
+        );
+    }
+
     deleteEmployee(id: number) {
         return this.query(
             `DELETE FROM employee WHERE id = $1`,
