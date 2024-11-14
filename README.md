@@ -37,7 +37,7 @@ After [installing](#installation) the application, you'll have to initialize the
 
 Going back to ```cd ../../```, simply run ```npm run build``` and then ```npm run start``` from the terminal from within the Develop folder. Then, follow the prompts using your keyboard's arrow keys and the return key. 
 
-See a video walkthrough of the application [here]().
+See a video walkthrough of the application [here](https://drive.google.com/file/d/1DXPyMtcYDwTl7HKKeCx4kH0KibFfOCjW/view?usp=sharing).
 
 ## License
 
